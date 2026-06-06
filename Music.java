@@ -25,6 +25,9 @@ class Playlist{
             songs[count] = s;
             count++;
         }
+        else{
+            System.out.println("Playlist is full!");
+        }
     }
     public void shuffle(){
         Random rand = new Random();
@@ -46,13 +49,22 @@ class Playlist{
 public class Music{
     public static void main(String[] args){
         Scanner sc = new Scanner (System.in);
-        Playlist myPlaylist = new Playlist(5);
-        myPlaylist.addsong(new Song("Believer", "Imagine Dragons"));
-        myPlaylist.addsong(new Song("Shape of You", "Ed Sheeran"));
-        System.out.println("Original:");
+        System.out.print("Enter the number of songs you want to add: ");
+        int n = sc.nextInt();
+        sc.nextLine(); 
+        Playlist myPlaylist = new Playlist(n);
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nEnter details for song " + (i + 1) + ":");
+            System.out.print("Enter title: ");
+            String title = sc.nextLine();
+            System.out.print("Enter artist: ");
+            String artist = sc.nextLine();
+            myPlaylist.addsong(new Song(title, artist));
+        }
+        System.out.println("\nOriginal Playlist:");
         myPlaylist.display();
         myPlaylist.shuffle();
-        System.out.println("Shuffled:");
+        System.out.println("\nShuffled Playlist:");
         myPlaylist.display();
     }
 }
